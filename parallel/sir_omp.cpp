@@ -9,13 +9,11 @@
 
 using namespace std;
 
-// Estados
 const int S = 0;
 const int I = 1;
 const int R = 2;
 const int D = 3;
 
-// Parámetros
 const int N = 1000;
 const int DAYS = 365;
 
@@ -23,11 +21,9 @@ double beta_rate = 0.3;
 double gamma_rate = 0.1;
 double mu_rate = 0.01;
 
-// Vecinos (4-direcciones)
 int dx[4] = {-1, 1, 0, 0};
 int dy[4] = {0, 0, -1, 1};
 
-// ✅ Guardar frame para animación
 void guardarFrame(const vector<vector<int>>& grid, int dia) {
     stringstream nombre;
     nombre << "data/frame_par_" << dia << ".csv";
@@ -49,7 +45,6 @@ int main() {
     vector<vector<int>> grid(N, vector<int>(N, S));
     vector<vector<int>> new_grid = grid;
 
-    // Infectar centro
     grid[N/2][N/2] = I;
 
     ofstream file("output_omp.csv");
@@ -65,7 +60,6 @@ int main() {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
 
-                // Generador local por hilo (evita conflictos)
                 mt19937 local_gen(i * N + j + day);
                 uniform_real_distribution<> local_dis(0.0, 1.0);
 
@@ -116,14 +110,11 @@ int main() {
                 else if (new_grid[i][j] == D) countD++;
             }
         }
-
-        // Actualizar grid
+        
         grid = new_grid;
 
-        // Guardar frame
         guardarFrame(grid, day);
 
-        // Guardar estadísticas
         file << day << "," << countS << "," << countI << "," << countR << "," << countD << "\n";
 
         cout << "Day " << day << " I=" << countI << endl;
@@ -134,7 +125,6 @@ int main() {
 
     cout << "Tiempo total: " << total_time << " segundos" << endl;
 
-    // ✅ Guardar automáticamente para Strong Scaling
     int threads = omp_get_max_threads();
     ofstream tfile("times_auto.csv", ios::app);
     tfile << threads << "," << total_time << "\n";
