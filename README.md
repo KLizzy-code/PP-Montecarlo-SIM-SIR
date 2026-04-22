@@ -46,16 +46,8 @@ SIR_MONTECARLO_SIM/
 
 ## Ejecución
 
-### Opción 1: Ejecutables
-
-Ejecutar directamente:
-
 sir_seq.exe  
 sir_omp.exe  
-
-### Opción 2: Código fuente
-
-python sequential/sir_simulation.py
 
 
 ## Resultados
@@ -67,7 +59,6 @@ Los archivos CSV contienen:
 - Medición de tiempos de ejecución
 
 El archivo GIF muestra visualmente la diferencia entre ambas implementaciones.
-
 
 ## Objetivo
 
