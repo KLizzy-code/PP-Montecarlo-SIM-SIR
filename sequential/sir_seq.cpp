@@ -3,17 +3,15 @@
 #include <random>
 #include <cmath>
 #include <fstream>
-#include <sstream> // 👈 NUEVO
+#include <sstream> 
 
 using namespace std;
 
-// Estados
 const int S = 0;
 const int I = 1;
 const int R = 2;
 const int D = 3;
 
-// Parámetros
 const int N = 1000;
 const int DAYS = 365;
 
@@ -21,12 +19,9 @@ double beta_rate = 0.3;
 double gamma_rate = 0.1;
 double mu_rate = 0.01;
 
-// Vecinos
 int dx[4] = {-1, 1, 0, 0};
 int dy[4] = {0, 0, -1, 1};
 
-
-// ✅ FUNCIÓN NUEVA
 void guardarFrame(const vector<vector<int>>& grid, int dia) {
     stringstream nombre;
     nombre << "data/frame_seq_" << dia << ".csv"; // ✅ FIX
@@ -53,7 +48,6 @@ int main() {
     mt19937 gen(rd());
     uniform_real_distribution<> dis(0.0, 1.0);
 
-    // Infectar una persona inicial
     grid[N/2][N/2] = I;
 
     ofstream file("output_seq.csv");
@@ -120,7 +114,6 @@ int main() {
 
         grid = new_grid;
 
-        // ✅ GUARDAR FRAME AQUÍ
         guardarFrame(grid, day);
 
         file << day << "," << countS << "," << countI << "," << countR << "," << countD << "\n";
