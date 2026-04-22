@@ -14,13 +14,11 @@ for i in range(min(len(seq_files), len(par_files))):
 
     plt.figure(figsize=(8,4))
 
-    # Secuencial
     plt.subplot(1,2,1)
     plt.title(f"Secuencial Día {i}")
     plt.imshow(seq)
     plt.axis('off')
 
-    # Paralelo
     plt.subplot(1,2,2)
     plt.title(f"Paralelo Día {i}")
     plt.imshow(par)
